@@ -1,0 +1,103 @@
+/*
+ * @author: JamesToolenDCU
+ * @text	date: 17th March '16
+ * 			updated 19th, 20th, 21st
+ */
+package listeners;
+//import listener, arraylist, Point
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.util.List;
+//import drawpanel and shapes
+import draw.DrawPanel;
+import draw.shapes.Line;
+import draw.shapes.Oval;
+import draw.shapes.Pencil;
+import draw.shapes.Shape;
+import draw.shapes.Square;
+import staticThings.StaticVars;
+
+public class DrawPanelListener implements MouseListener, MouseMotionListener {
+	//declare variables
+	private DrawPanel panel;
+	
+	private boolean drag = false;
+	
+	private Shape drawShape;
+	
+	public DrawPanelListener(DrawPanel dp){
+		panel = dp;
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		drawShape = getTmpShape(e.getX(), e.getY(), 2, 2);
+		panel.setTmpShape(drawShape);
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		drawShape.setX2(e.getX());
+		drawShape.setY2(e.getY());
+		
+		List<Shape> shapes = panel.getShapes();
+		shapes.add(drawShape);
+		panel.setTmpShape(null);
+		panel.setShapes(shapes);
+		drawShape = null;
+		
+		panel.repaint();
+	}
+	
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		if(drawShape instanceof Pencil){
+			((Pencil) drawShape).addPoint(new Point(e.getX(), e.getY()));
+		}else{
+			drawShape.setX2(e.getX());
+			drawShape.setY2(e.getY());
+		}
+		panel.setTmpShape(drawShape);
+		panel.repaint();
+	}
+	
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		
+	}
+	
+	private Shape getTmpShape(int x, int y, int x2, int y2){
+		switch(StaticVars.shapeType){
+		case "square":
+			return new Square(x, y, x2, y2, StaticVars.shapeColor);
+		case "oval":
+			return new Oval(x, y, x2, y2, StaticVars.shapeColor);
+		case "pencil":
+			return new Pencil(x, y, x2, y2, StaticVars.shapeColor);
+		case "line":
+			return new Line(x, y, x2, y2, StaticVars.shapeColor);
+		default:
+			return new Line(x, y, x2, y2, StaticVars.shapeColor);
+		}
+		
+	}
+
+}

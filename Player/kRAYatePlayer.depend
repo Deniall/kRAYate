@@ -1,0 +1,436 @@
+# depslib dependency file v1.0
+1461716658 source:c:\users\hacketb2\desktop\krayate-master\player\csvreader.cpp
+	"csvReader.h"
+	<iostream>
+
+1461701374 c:\users\hacketb2\desktop\krayate-master\player\csvreader.h
+	<vector>
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+
+1461720426 source:c:\users\hacketb2\desktop\krayate-master\player\main.cpp
+	<cmath>
+	<vector>
+	<iostream>
+	"quickcg.h"
+	"fileLoader.h"
+	<sstream>
+	<string>
+	"vector2D.h"
+	"gameobject.h"
+
+1460369606 c:\users\hacketb2\desktop\krayate-master\player\quickcg.h
+	<SDL/SDL.h>
+	<string>
+	<sstream>
+	<iomanip>
+	<vector>
+	<algorithm>
+
+1461721176 c:\users\hacketb2\desktop\krayate-master\player\fileloader.h
+	<string>
+	<iostream>
+	<vector>
+	<sstream>
+	"quickcg.h"
+	"iniRead.h"
+	"csvReader.h"
+	"gameobject.h"
+	"vector2D.h"
+
+1461708746 c:\users\hacketb2\desktop\krayate-master\player\iniread.h
+	<iostream>
+	<fstream>
+	<string>
+
+1461720718 c:\users\hacketb2\desktop\krayate-master\player\gameobject.h
+	"vector2D.h"
+	<vector>
+	<string>
+
+1461162490 c:\users\hacketb2\desktop\krayate-master\player\vector2d.h
+	<cmath>
+
+1460369600 source:c:\users\hacketb2\desktop\krayate-master\player\quickcg.cpp
+	"quickcg.h"
+	<SDL/SDL.h>
+	<cstdlib>
+	<cmath>
+	<vector>
+	<map>
+	<iostream>
+	<fstream>
+
+1461162492 source:c:\users\hacketb2\desktop\krayate-master\player\vector2d.cpp
+	"vector2D.h"
+
+1461744577 source:c:\users\hacketb2\desktop\krayate-master\player\gameobject.cpp
+	"gameobject.h"
+	<iostream>
+
+1461751868 source:c:\users\hacketb2\documents\github\krayate\player\csvreader.cpp
+	"csvReader.h"
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+
+1461701374 c:\users\hacketb2\documents\github\krayate\player\csvreader.h
+	<vector>
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+
+1461775669 source:c:\users\hacketb2\documents\github\krayate\player\gameobject.cpp
+	"gameobject.h"
+	<iostream>
+
+1461775514 c:\users\hacketb2\documents\github\krayate\player\gameobject.h
+	"vector2D.h"
+	"script.h"
+	<vector>
+	<string>
+
+1461162490 c:\users\hacketb2\documents\github\krayate\player\vector2d.h
+	<cmath>
+
+1461777739 source:c:\users\hacketb2\documents\github\krayate\player\main.cpp
+	<cmath>
+	<vector>
+	<iostream>
+	"quickcg.h"
+	"fileLoader.h"
+	<sstream>
+	<string>
+	"vector2D.h"
+	"gameobject.h"
+
+1460369606 c:\users\hacketb2\documents\github\krayate\player\quickcg.h
+	<SDL/SDL.h>
+	<string>
+	<sstream>
+	<iomanip>
+	<vector>
+	<algorithm>
+
+1461775776 c:\users\hacketb2\documents\github\krayate\player\fileloader.h
+	<string>
+	<iostream>
+	<vector>
+	<sstream>
+	<stdio.h>
+	<stdlib.h>
+	"quickcg.h"
+	"iniRead.h"
+	"csvReader.h"
+	"gameobject.h"
+	"vector2D.h"
+
+1461708746 c:\users\hacketb2\documents\github\krayate\player\iniread.h
+	<iostream>
+	<fstream>
+	<string>
+
+1460369600 source:c:\users\hacketb2\documents\github\krayate\player\quickcg.cpp
+	"quickcg.h"
+	<SDL/SDL.h>
+	<cstdlib>
+	<cmath>
+	<vector>
+	<map>
+	<iostream>
+	<fstream>
+
+1461771969 source:c:\users\hacketb2\documents\github\krayate\player\vector2d.cpp
+	"vector2D.h"
+	<iostream>
+
+1461752026 source:c:\users\marcin\desktop\krayate\player\csvreader.cpp
+	"csvReader.h"
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+
+1461751740 c:\users\marcin\desktop\krayate\player\csvreader.h
+	<vector>
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+
+1461758995 source:c:\users\marcin\desktop\krayate\player\gameobject.cpp
+	"gameobject.h"
+	<iostream>
+
+1461753123 c:\users\marcin\desktop\krayate\player\gameobject.h
+	"vector2D.h"
+	"script.h"
+	<vector>
+	<string>
+
+1460821389 c:\users\marcin\desktop\krayate\player\vector2d.h
+	<cmath>
+
+1461759194 source:c:\users\marcin\desktop\krayate\player\main.cpp
+	<cmath>
+	<vector>
+	<iostream>
+	"quickcg.h"
+	"fileLoader.h"
+	<sstream>
+	<string>
+	"vector2D.h"
+	"gameobject.h"
+
+1461751740 c:\users\marcin\desktop\krayate\player\quickcg.h
+	<SDL/SDL.h>
+	<string>
+	<sstream>
+	<iomanip>
+	<vector>
+	<algorithm>
+
+1325742239 c:\sdl\include\sdl\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_audio.h"
+	"SDL_cdrom.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_loadso.h"
+	"SDL_mutex.h"
+	"SDL_rwops.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_video.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\sdl\include\sdl\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\sdl\include\sdl\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<iconv.h>
+	"begin_code.h"
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	"close_code.h"
+
+1326114587 c:\sdl\include\sdl\sdl_config.h
+	"SDL_platform.h"
+	"SDL_config_dreamcast.h"
+	"SDL_config_macos.h"
+	"SDL_config_macosx.h"
+	"SDL_config_symbian.h"
+	"SDL_config_win32.h"
+	"SDL_config_os2.h"
+	"SDL_config_minimal.h"
+
+1325742239 c:\sdl\include\sdl\sdl_platform.h
+
+1326114594 c:\sdl\include\sdl\sdl_config_win32.h
+	"SDL_platform.h"
+
+1326114600 c:\sdl\include\sdl\begin_code.h
+
+1325742239 c:\sdl\include\sdl\close_code.h
+
+1325742239 c:\sdl\include\sdl\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\sdl\include\sdl\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\sdl\include\sdl\sdl_endian.h
+	"SDL_stdinc.h"
+	<endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\sdl\include\sdl\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\sdl\include\sdl\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	"close_code.h"
+
+1325742239 c:\sdl\include\sdl\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\sdl\include\sdl\sdl_cdrom.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\sdl\include\sdl\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\sdl\include\sdl\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_active.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_quit.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\sdl\include\sdl\sdl_active.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\sdl\include\sdl\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keysym.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\sdl\include\sdl\sdl_keysym.h
+
+1325742239 c:\sdl\include\sdl\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\sdl\include\sdl\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\sdl\include\sdl\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\sdl\include\sdl\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1325742239 c:\sdl\include\sdl\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\sdl\include\sdl\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\sdl\include\sdl\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1461752023 c:\users\marcin\desktop\krayate\player\fileloader.h
+	<string>
+	<iostream>
+	<vector>
+	<sstream>
+	<stdio.h>
+	<stdlib.h>
+	"quickcg.h"
+	"iniRead.h"
+	"csvReader.h"
+	"gameobject.h"
+	"vector2D.h"
+
+1461751740 c:\users\marcin\desktop\krayate\player\iniread.h
+	<iostream>
+	<fstream>
+	<string>
+
+1459537835 source:c:\users\marcin\desktop\krayate\player\quickcg.cpp
+	"quickcg.h"
+	<SDL/SDL.h>
+	<cstdlib>
+	<cmath>
+	<vector>
+	<map>
+	<iostream>
+	<fstream>
+
+1460821389 source:c:\users\marcin\desktop\krayate\player\vector2d.cpp
+	"vector2D.h"
+
+1461759202 source:c:\users\marcin\desktop\krayate\player\script.cpp
+	"script.h"
+
+1461759315 c:\users\marcin\desktop\krayate\player\script.h
+	<string>
+	<sstream>
+	<iostream>
+	<fstream>
+	<stdlib.h>
+
+1461771969 c:\users\hacketb2\documents\github\krayate\player\script.h
+	<string>
+	<sstream>
+	<iostream>
+	<fstream>
+	<stdlib.h>
+	"vector2D.h"
+
+1461772063 source:c:\users\hacketb2\documents\github\krayate\player\script.cpp
+	"script.h"
+

@@ -1,0 +1,103 @@
+/*
+ * @author JToolenDCU date 17th March '16
+ * @text	updated 18-3-16
+ * 			Class for the drawing to take place
+ */
+package draw;
+//import ArrayList and graphics
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.util.ArrayList;
+import java.util.List;
+//import JPanel
+import javax.swing.JPanel;
+import javax.swing.border.Border;
+import javax.swing.border.MatteBorder;
+
+import draw.shapes.Shape;
+import listeners.DrawPanelListener;
+
+public class DrawPanel extends JPanel {
+	//serialize to keep state of class in memory
+	private static final long serialVersionUID = 1L;
+	
+	private DrawPanelListener dpl;
+	private List<Shape> shapes = new ArrayList<>();
+	
+	private Shape tmpShape;
+	
+	public DrawPanel(){
+		//draw a grid
+		drawGrid();
+				
+		//init colour
+		setOpaque(true);
+		//setBackground(Color.WHITE);
+		
+		//listeners
+		//dpl = new DrawPanelListener(this);
+		//addMouseListener(dpl);
+		//addMouseMotionListener(dpl);
+	}
+	//method to display a grid on the panel
+	void drawGrid(){
+		setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        for (int row = 0; row < 64; row++) {
+            for (int col = 0; col < 64; col++) {
+                gbc.gridx = col;
+                gbc.gridy = row;
+
+                CellPane cellPane = new CellPane();
+                Border border = null;
+                if (row < 63) {
+                    if (col < 63) {
+                        border = new MatteBorder(1, 1, 0, 0, Color.GRAY);
+                    } else {
+                        border = new MatteBorder(1, 1, 0, 1, Color.GRAY);
+                    }
+                } else {
+                    if (col < 63) {
+                        border = new MatteBorder(1, 1, 1, 0, Color.GRAY);
+                    } else {
+                        border = new MatteBorder(1, 1, 1, 1, Color.GRAY);
+                    }
+                }
+                cellPane.setBorder(border);
+                add(cellPane, gbc);
+            }
+        }
+	}
+	//method to paint panel
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+		
+		if(tmpShape != null)
+			tmpShape.render(g);
+		
+		for(Shape s : shapes){
+			if(s != null)
+				s.render(g);
+		}
+	}
+	//return array of shapes
+	public List<Shape> getShapes() {
+		return shapes;
+	}
+	//set the array of shapes
+	public void setShapes(List<Shape> shapes) {
+		this.shapes = shapes;
+	}
+	//return temporary shape
+	public Shape getTmpShape() {
+		return tmpShape;
+	}
+	//set the shape were using
+	public void setTmpShape(Shape tmpShape) {
+		this.tmpShape = tmpShape;
+	}
+	
+}

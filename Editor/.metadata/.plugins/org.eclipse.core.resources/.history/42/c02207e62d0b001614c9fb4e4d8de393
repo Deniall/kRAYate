@@ -1,0 +1,70 @@
+/*
+ * @author JamesToolenDCU 18th March '16
+ * @text	class for Static variables colour
+ */
+
+package staticThings;
+
+import java.awt.Color;
+import java.io.IOException;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import javax.swing.JOptionPane;
+
+public class StaticVars {
+	
+	public static String shapeType = "square", fileName = "LevelErr", levelWorked;
+	public static Color shapeColor = Color.BLACK;
+	public static boolean shapeFilled = false;
+	public static boolean mouseDrag = false;
+	public static Color defaultBackground = Color.WHITE;
+	public static Path settingsPath, destinationLevelPath, destinationSettingsPath, launchPath;
+	
+	static{
+		levelWorked =  JOptionPane.showInputDialog("What Level are you working on?");
+		//JOptionPane.showMessageDialog(null, ClassLoader.getSystemClassLoader().getResource(".").getPath());
+		setSettingsPath(Paths.get("externalFiles/gameData.ini"));
+		setDestinationLevelPath(Paths.get(ClassLoader.getSystemClassLoader().getResource(".").getPath() + "/resources/Burgerworm/Data/Levels/"));
+		setDestinationSettingsPath(Paths.get(ClassLoader.getSystemClassLoader().getResource(".").getPath() + "/resources/Burgerworm/gameData.ini"));
+		setLaunchPath(Paths.get(ClassLoader.getSystemClassLoader().getResource(".").getPath() + "/resources/Burgerworm/kRAYatePlayer.exe"));
+	}
+	
+	public static Path getLaunchPath() {
+		try {
+			return launchPath.toRealPath(LinkOption.NOFOLLOW_LINKS);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return launchPath.toAbsolutePath();
+		}
+	}
+	
+	public static void setLaunchPath(Path launchPath) {
+		StaticVars.launchPath = launchPath;
+	}
+	public static Path getSettingsPath() {
+		try {
+			return settingsPath.toRealPath(LinkOption.NOFOLLOW_LINKS);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return settingsPath.toAbsolutePath();
+		}
+	}
+	
+	public static void setSettingsPath(Path settingsPath) {
+		StaticVars.settingsPath = settingsPath;
+	}
+	public static Path getDestinationLevelPath() {
+		return destinationLevelPath;
+	}
+	public static void setDestinationLevelPath(Path destinationLevelPath) {
+		StaticVars.destinationLevelPath = destinationLevelPath;
+	}
+	public static Path getDestinationSettingsPath() {
+		return destinationSettingsPath;
+	}
+	public static void setDestinationSettingsPath(Path destinationSettingsPath) {
+		StaticVars.destinationSettingsPath = destinationSettingsPath;
+	}
+}

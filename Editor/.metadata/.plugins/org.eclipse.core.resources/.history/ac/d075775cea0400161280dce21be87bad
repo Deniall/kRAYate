@@ -1,0 +1,101 @@
+package draw;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JPanel;
+
+import draw.shapes.Line;
+import draw.shapes.Oval;
+import draw.shapes.Pencil;
+import draw.shapes.Shape;
+import draw.shapes.Square;
+import staticThings.StaticVars;
+
+
+public class CellPane extends JPanel {
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+    
+	private Shape tmpShape;
+	private Shape drawShape;
+	
+    public CellPane() {
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                StaticVars.defaultBackground = getBackground();
+                setBackground(StaticVars.shapeColor);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	if(StaticVars.mouseDrag){
+            		setBackground(StaticVars.shapeColor);
+            	}else{
+            		setBackground(StaticVars.defaultBackground);
+            	}
+            }
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+            	drawShape = getTmpShape(e.getX(), e.getY(), 2, 2);
+        		panel.setTmpShape(drawShape);
+            	StaticVars.mouseDrag = true;
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){
+            	if(StaticVars.mouseDrag){
+            		setBackground(StaticVars.shapeColor);
+            	}
+            	StaticVars.mouseDrag = false;
+            }
+            
+            @Override
+            public void mouseClicked(MouseEvent e){
+            	setBackground(StaticVars.shapeColor);
+            }
+            
+            @Override
+        	public void mouseDragged(MouseEvent e) {
+				if(drawShape instanceof Line){
+        			((Pencil) drawShape).addPoint(new Point(e.getX(), e.getY()));
+        		}else{
+        			drawShape.setX2(e.getX());
+        			drawShape.setY2(e.getY());
+        		}
+        	    panel.setTmpShape(drawShape);
+        		panel.repaint();
+        	}
+        });
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(10, 10);
+    }
+   
+    private Shape getTmpShape(int x, int y, int x2, int y2){
+		switch(StaticVars.shapeType){
+		case "square":
+			return new Square(x, y, x2, y2, StaticVars.shapeColor);
+		case "oval":
+			return new Oval(x, y, x2, y2, StaticVars.shapeColor);
+		case "pencil":
+			return new Pencil(x, y, x2, y2, StaticVars.shapeColor);
+		case "line":
+			return new Line(x, y, x2, y2, StaticVars.shapeColor);
+		default:
+			return new Line(x, y, x2, y2, StaticVars.shapeColor);
+		}
+		
+	}
+}

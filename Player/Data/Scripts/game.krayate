@@ -1,0 +1,2 @@
+if distance() is lessthan 1 then position.x incrementby 0.1
+if distance() is lessthan 1 then position.y incrementby 0.1

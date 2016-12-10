@@ -1,0 +1,124 @@
+/**
+ * 
+ * @author JToolenDCU
+ * @version 6.2
+ * date: 17th March'16
+ */
+package main;
+// import jframe, layout, dimension and windowlistener
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.awt.geom.Ellipse2D;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+
+import draw.DrawPanel;
+import menus.MainMenu;
+import menus.MainToolBar;
+
+public class MainFrame extends JFrame implements WindowListener{
+	/*
+	*@text to help store the state of this object
+	*		serialised to byte array for easy retrieval
+	*/
+	private static final long serialVersionUID =1L;
+	
+	//preferred size of frame
+	private Dimension SIZE = new Dimension(550, 550);
+	
+	private DrawPanel panel = new DrawPanel();
+	
+	private Ellipse2D.Double border = new Ellipse2D.Double();
+	
+	public MainFrame(){
+		super("kRAYate Ray Casting Game Editor");
+		setLayout(new BorderLayout());
+		//add panel
+		add(panel, BorderLayout.CENTER);
+		
+		//add image to top left of frame
+		ImageIcon krayate = new ImageIcon("src/images/iFAJ26P5.jpg");
+		this.setIconImage(krayate.getImage());
+		
+		//add mainmenu
+		MainMenu topMenu = new MainMenu(this);
+		setJMenuBar(topMenu);
+		
+		//add Toolbar
+		MainToolBar topTool = new MainToolBar(this);
+		add(topTool, BorderLayout.NORTH);
+		
+		setPreferredSize(SIZE);
+		super.setSize(SIZE);
+		setResizable(true);
+		setLocationRelativeTo(null); //centre frame
+		//setDefaultCloseOperation(EXIT_ON_CLOSE); //change to window listener later
+		pack();
+		setVisible(true);
+	}
+	
+	public void paintComponent(Graphics g) {
+	    //super.paintComponent();
+	    Graphics2D g2d = (Graphics2D) g;
+	    int width = getWidth();
+	    int height = getHeight();
+	    g2d.setPaintMode();
+	    g2d.fillRect(0, 0, width, height);
+	    border.setFrame(0, 0, width, height);
+	    g2d.setClip(border);
+	    //g2d.drawImage(image, 0, 0, width, height, this);
+	}
+	
+	public DrawPanel getDrawPanel(){
+		return panel;
+	}
+	
+	public void setSize(Dimension s){
+		SIZE = s;
+		setPreferredSize(s);
+		super.setSize(SIZE);
+	}
+	
+	//add overridden abstract methods from windowlistener
+	@Override
+	public void windowActivated(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		System.exit(0);
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+		
+	}
+}
+
+

@@ -1,0 +1,66 @@
+/*
+ * @author JToolenDCU date 17th March '16
+ * @text	updated 18-3-16
+ * 			Class for the drawing to take place
+ */
+package draw;
+//import ArrayList and graphics
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.List;
+//import JPanel
+import javax.swing.JPanel;
+
+import draw.shapes.Shape;
+import listeners.DrawPanelListener;
+
+public class DrawPanel extends JPanel {
+	//serialize to keep state of class in memory
+	private static final long serialVersionUID = 1L;
+	
+	private DrawPanelListener dpl;
+	private List<Shape> shapes = new ArrayList<>();
+	
+	private Shape tmpShape;
+	
+	public DrawPanel(){
+		//init colour
+		setOpaque(true);
+		setBackground(Color.WHITE);
+		//listeners
+		dpl = new DrawPanelListener(this);
+		addMouseListener(dpl);
+		addMouseMotionListener(dpl);
+	}
+	//method to paint panel
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+		
+		if(tmpShape != null)
+			tmpShape.render(g);
+		
+		for(Shape s : shapes){
+			if(s != null)
+				s.render(g);
+		}
+	}
+	//return array of shapes
+	public List<Shape> getShapes() {
+		return shapes;
+	}
+	//set the array of shapes
+	public void setShapes(List<Shape> shapes) {
+		this.shapes = shapes;
+	}
+	//return temporary shape
+	public Shape getTmpShape() {
+		return tmpShape;
+	}
+	//set the shape were using
+	public void setTmpShape(Shape tmpShape) {
+		this.tmpShape = tmpShape;
+	}
+	
+}

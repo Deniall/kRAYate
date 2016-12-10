@@ -1,0 +1,44 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin-top: 0px;
+	background-color: #36393D;
+	color: white;
+	font-family: 'Maven Pro', sans-serif;
+}
+
+.container {
+	width: 460px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.logo {
+	float: left;
+	width: 460px;
+	margin-top: 200px;
+	text-align: center;
+	font-size: 100px;
+}
+
+.menu {
+	width: 460px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.menu a {
+	width: 460px;
+	font-size: 20px;
+	cursor: pointer;
+	color: #D9D9D9;
+	text-decoration: none;
+}
+
+.menu a:hover {
+	color: white;
+}

@@ -1,0 +1,76 @@
+package draw;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JPanel;
+
+import staticThings.StaticVars;
+
+
+public class CellPane extends JPanel implements MouseListener {
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Color defaultBackground;
+
+    public CellPane() {
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                defaultBackground = getBackground();
+                setBackground(StaticVars.shapeColor);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	if(StaticVars.mouseDrag){
+            		setBackground(StaticVars.shapeColor);
+            	}else{
+            		setBackground(defaultBackground);
+            	}
+            }
+        });
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(7, 7);
+    }
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		while(e.isPopupTrigger()){
+			StaticVars.mouseDrag = true;
+		}
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+}

@@ -1,0 +1,7 @@
+package draw;
+
+import JPanel;
+
+public class CellPane extends JPanel {
+
+}

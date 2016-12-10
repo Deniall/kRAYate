@@ -1,0 +1,330 @@
+/**
+ * @author	JToolenDCU date: 17th March'16
+ * @text	A class for the main menu and its components
+ */
+package menus;
+//import graphics, Actionlistener, file IO
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+
+//import menu components and image IO
+import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import dialog.SettingDialog;
+import draw.DrawPanel;
+import main.MainFrame;
+import staticThings.StaticVars;
+
+public class MainMenu extends JMenuBar{
+	//serialize to keep state of class in memory
+	private static final long serialVersionUID = 1L;
+	
+	private MainFrame mf;
+	
+	//menu file items
+	private JMenuItem newAction = new JMenuItem("New...");
+	private JMenuItem openAction = new JMenuItem("Open...");
+	private JMenuItem saveAction = new JMenuItem("Save");
+	private JMenuItem saveAsAction = new JMenuItem("Save As...");
+	private JMenuItem exitAction = new JMenuItem("Exit");
+	
+	//menu edit items
+	private JMenuItem undoAction = new JMenuItem("Undo");
+	private JMenuItem redoAction = new JMenuItem("Redo");
+	private JMenuItem cutAction= new JMenuItem("Cut");
+	private JMenuItem copyAction = new JMenuItem("Copy");
+	private JMenuItem pasteAction = new JMenuItem("Paste");
+	
+	//game settings items
+	private JMenuItem editSettingsAction = new JMenuItem("Edit Game Settings");
+	
+	/**menu image items
+	private JMenuItem resizeImgAction = new JMenuItem("Resize image");
+	private JMenuItem resizeCanvasAction = new JMenuItem("Resize Canvas");
+	private JMenuItem turn90ClockAction = new JMenuItem("Rotate 90' clockwise");
+	private JMenuItem turn90CounterAction = new JMenuItem("Rotate 90' counter clockwise");
+	private JMenuItem rotate180Action = new JMenuItem("Rotate 180'");
+	*/
+	//launch item
+	private JMenuItem launchAction = new JMenuItem("Launch Your Game");
+	
+	public MainMenu(MainFrame mf){
+		
+		this.mf = mf; 
+		//build menus
+		JMenu fileMenu = new JMenu("File");
+		JMenu editMenu = new JMenu("Edit");
+		JMenu settingsMenu = new JMenu("Settings");
+		//JMenu imageMenu = new JMenu("Image");
+		JMenu launchMenu = new JMenu("Launch");
+		
+		//add menus
+		this.add(fileMenu);
+		this.add(editMenu);
+		this.add(settingsMenu);
+		//this.add(imageMenu);
+		this.add(launchMenu);
+		
+		
+		//add menu items to menu
+		
+		//file
+		fileMenu.add(newAction);
+		fileMenu.add(openAction);
+		fileMenu.add(saveAction);
+		fileMenu.add(saveAsAction);
+		fileMenu.addSeparator();
+		fileMenu.add(exitAction);
+		
+		//edit
+		editMenu.add(undoAction);
+		editMenu.add(redoAction);
+		editMenu.addSeparator();
+		editMenu.add(cutAction);
+		editMenu.add(copyAction);
+		editMenu.add(pasteAction);
+
+		//game settings
+		settingsMenu.add(editSettingsAction);
+		/*
+		settingsMenu.add(gameScreenSizeAction);
+		settingsMenu.add(playerPosAction);
+		settingsMenu.add(playerSpeedAction);
+		*/
+		/**image
+		imageMenu.add(resizeImgAction);
+		imageMenu.add(resizeCanvasAction);
+		imageMenu.addSeparator();
+		imageMenu.add(turn90ClockAction);
+		imageMenu.add(turn90CounterAction);
+		imageMenu.add(rotate180Action);
+		*/
+		//launch settings
+		launchMenu.add(launchAction);
+		
+		//initiate listeners
+		initFileActions();
+		initEditActions();
+		initSettingsActions();
+		//initImageActions();
+		initLaunchActions();
+	}
+	
+	private void initSettingsActions(){
+		editSettingsAction.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new SettingDialog(mf).setVisible(true);
+			}
+			
+		});
+
+	}
+	
+	/*
+	 * @text add function to listeners and declare abstract methods
+	 */
+
+	private void initFileActions(){
+		newAction.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e){
+				
+				
+			}
+		});
+		
+		openAction.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e){
+				
+				
+			}
+		});
+		
+		saveAction.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e){
+				save();
+			}
+		});
+		/*
+		 * @text save method for saving to png, jpg or jpeg
+		 */
+		saveAsAction.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e){
+				DrawPanel p = mf.getDrawPanel();
+				int w = p.getWidth();
+				int h = p.getHeight();
+				
+				BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+				Graphics2D g2d = bi.createGraphics();
+				p.paint(g2d);
+				
+				JFileChooser chooser = new JFileChooser();
+				
+				chooser.addChoosableFileFilter(new FileNameExtensionFilter(
+						"PNG (.png)", "png"));
+				chooser.addChoosableFileFilter(new FileNameExtensionFilter(
+						"JPG (.jpg)", "jpg"));
+				chooser.addChoosableFileFilter(new FileNameExtensionFilter(
+						"JPEG (.jpg)", "jpeg"));
+				chooser.setFileFilter(chooser.getChoosableFileFilters()[1]);
+				
+				int r = chooser.showSaveDialog(mf);
+				
+				if(r == JFileChooser.APPROVE_OPTION){
+					File out = chooser.getSelectedFile();
+					
+					String ext = out.getName().substring(out.getName().lastIndexOf(".")+ 1);
+					
+					if(ext.equalsIgnoreCase("png") || ext.equals("jpg") || ext.equals("jpeg")){
+						try{
+							ImageIO.write(bi, "png", out);
+						}catch(IOException e1){
+							e1.printStackTrace();
+						}
+					}else{
+						JOptionPane.showMessageDialog(null, "Wrong extension", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+				
+			}
+		});
+		
+		
+		/*
+		 * @text exit program
+		 */
+		exitAction.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e){
+				System.exit(0);//in future check if saved
+			}
+		});
+
+	}
+	
+	private void initEditActions() {
+		undoAction.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				
+				
+			}
+		});
+		
+		redoAction.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				
+				
+			}
+		});
+		
+		cutAction.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				
+				
+			}
+		});
+		
+		copyAction.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				
+				
+			}
+		});
+
+		pasteAction.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				
+				
+			}
+		});
+	}
+	
+	private void initLaunchActions(){
+		launchAction.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				moveFiles();
+			}
+		});
+	}
+	
+	private void moveFiles(){
+		try{
+			Files.move(StaticVars.getSettingsPath(), StaticVars.getDestinationSettingsPath(), StandardCopyOption.REPLACE_EXISTING);
+			Files.move(StaticVars.getLevelPath(), StaticVars.getDestinationLevelPath(), StandardCopyOption.REPLACE_EXISTING);
+			/**
+			System.out.printf("getSettingsPath Readable: %b, Writable: %b, Executable: %b ", Files.isReadable(StaticVars.getSettingsPath()), Files.isWritable(StaticVars.getSettingsPath()), Files.isExecutable(StaticVars.getSettingsPath()));
+			System.out.println();
+			System.out.printf("getDestinationSettingsPath Readable: %b, Writable: %b, Executable: %b ", Files.isReadable(StaticVars.getDestinationSettingsPath()), Files.isWritable(StaticVars.getDestinationSettingsPath()), Files.isExecutable(StaticVars.getDestinationSettingsPath()));
+			System.out.println();
+			System.out.printf("getLevelPath Readable: %b, Writable: %b, Executable: %b ", Files.isReadable(StaticVars.getLevelPath()), Files.isWritable(StaticVars.getLevelPath()), Files.isExecutable(StaticVars.getLevelPath()));
+			System.out.println();
+			System.out.printf("getDestinationLevelPath Readable: %b, Writable: %b, Executable: %b ", Files.isReadable(StaticVars.getDestinationLevelPath()), Files.isWritable(StaticVars.getDestinationLevelPath()), Files.isExecutable(StaticVars.getDestinationLevelPath()));
+		*/	
+		}catch(FileAlreadyExistsException fae){
+			fae.printStackTrace();
+		}catch(IOException ioe){
+			ioe.printStackTrace();
+		}
+		@SuppressWarnings("unused")
+		ProcessBuilder process = new ProcessBuilder(StaticVars.getDestinationSettingsPath().toAbsolutePath().toString());
+	}
+	
+	void save(){
+		DrawPanel p = mf.getDrawPanel();
+		int w = p.getWidth();
+		int h = p.getHeight();
+		
+		BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g2d = bi.createGraphics();
+		p.paint(g2d);
+		
+		File out = new File(getDirectory());
+		
+		String ext = out.getName().substring(out.getName().lastIndexOf(".")+ 1);
+		
+		if(ext.equalsIgnoreCase("png") || ext.equals("jpg") || ext.equals("jpeg")){
+			try{
+				ImageIO.write(bi, "png", out);
+			}catch(IOException e1){
+				e1.printStackTrace();
+			}
+		}else{
+			JOptionPane.showMessageDialog(null, "Wrong extension", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	String getDirectory(){
+		String input =  "\\Level" + JOptionPane.showInputDialog("What Level are you working on?") + ".png";
+		return StaticVars.getLevelPath().toAbsolutePath().toString() + input;
+	}
+}
+

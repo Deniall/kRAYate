@@ -1,0 +1,193 @@
+/**
+ * @author JToolenDCU 19th March '16
+ * @text class for dialog box to change ini settings
+ * updated 21st March '16
+ */
+
+package dialog;
+
+import javax.swing.JDialog;
+
+import main.MainFrame;
+
+import javax.swing.JLabel;
+import javax.swing.JSpinner;
+
+import javax.swing.JButton;
+import java.awt.Toolkit;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+import parsers.INITfile;
+
+public class SettingDialog extends JDialog{
+	
+
+	private static final long serialVersionUID = 1L;
+	private JTextField scrWidthField;
+	private JTextField scrHeightField;
+	private JTextField startPosXField;
+	private JTextField startPosYField;
+	private JSpinner playerSpeedspinner;
+	private JButton saveBut;
+	private JButton cancelBut;
+	private INITfile ini;
+	private int scrWidth, scrHeight, startPosX, startPosY;
+	private Double playerSpeed;
+	
+	public SettingDialog(MainFrame mf){
+		
+		setSize(300, 170);
+		setTitle("Game Settings");
+		setLocationRelativeTo(mf);
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(SettingDialog.class.getResource("/images/iFAJ26P5.jpg")));
+		getContentPane().setLayout(null);
+		
+		JLabel screenWidthLab = new JLabel("Game Screen Width: ");
+		screenWidthLab.setBounds(10, 0, 107, 25);
+		getContentPane().add(screenWidthLab);
+		
+		scrWidthField = new JTextField();
+		scrWidthField.setText("640");
+		scrWidthField.setBounds(188, 2, 86, 20);
+		getContentPane().add(scrWidthField);
+		scrWidthField.setColumns(4);
+		scrWidth = Integer.parseInt(scrWidthField.getText());
+		
+		JLabel screenHeightLab = new JLabel("Game Screen Height: ");
+		screenHeightLab.setBounds(10, 21, 107, 25);
+		getContentPane().add(screenHeightLab);
+		
+		scrHeightField = new JTextField();
+		scrHeightField.setText("512");
+		scrHeightField.setBounds(188, 23, 86, 20);
+		getContentPane().add(scrHeightField);
+		scrHeightField.setColumns(4);
+		scrHeight = Integer.parseInt(scrHeightField.getText());
+		
+		JLabel playerPosLab = new JLabel("Player Start Position: ");
+		playerPosLab.setBounds(10, 41, 107, 25);
+		getContentPane().add(playerPosLab);
+		
+		JLabel playerSpeedLab = new JLabel("Player Speed: ");
+		playerSpeedLab.setBounds(10, 61, 107, 25);
+		getContentPane().add(playerSpeedLab);
+		
+		JLabel startPosXLbl = new JLabel("X:");
+		startPosXLbl.setBounds(127, 46, 17, 14);
+		getContentPane().add(startPosXLbl);
+		
+		startPosXField = new JTextField();
+		startPosXField.setText("32");
+		startPosXField.setBounds(138, 43, 19, 20);
+		getContentPane().add(startPosXField);
+		startPosXField.setColumns(2);
+		
+		JLabel startPosYLbl = new JLabel("Y:");
+		startPosYLbl.setBounds(183, 46, 10, 14);
+		getContentPane().add(startPosYLbl);
+		
+		startPosYField = new JTextField();
+		startPosYField.setText("32");
+		startPosYField.setColumns(2);
+		startPosYField.setBounds(194, 43, 19, 20);
+		getContentPane().add(startPosYField);
+		
+		playerSpeedspinner = new JSpinner();
+		playerSpeedspinner.setModel(new SpinnerNumberModel(new Double(0.8), new Double(0.8), new Double(1.2), new Double(0.05)));
+		playerSpeedspinner.setBounds(127, 63, 49, 20);
+		getContentPane().add(playerSpeedspinner);
+		
+		cancelBut = new JButton("Cancel");
+		cancelBut.setBounds(174, 97, 100, 25);
+		getContentPane().add(cancelBut);
+		
+		saveBut = new JButton("Save");
+		saveBut.setBounds(17, 97, 100, 25);
+		getContentPane().add(saveBut);
+		
+		initActions();
+	}
+	
+	private void initActions(){
+		
+		scrWidthField.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e){
+				String text = (String) e.getSource();
+				System.out.println(text);
+				scrWidth = Integer.parseInt(text);
+			}
+		});
+		
+		scrHeightField.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e){
+				scrHeight = Integer.parseInt(scrHeightField.getText());
+			}
+		});
+		
+		startPosXField.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e){
+				startPosX = Integer.parseInt(startPosXField.getText());
+			}
+		});
+		
+		startPosYField.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e){
+				startPosY = Integer.parseInt(startPosYField.getText());
+			}
+		});
+		
+		playerSpeedspinner.addChangeListener(new ChangeListener(){
+			
+			@Override
+			public void stateChanged(ChangeEvent e){
+				playerSpeed = (Double) playerSpeedspinner.getValue();
+			}
+
+		});
+		
+		saveBut.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e){
+				
+				ini = new INITfile(new File("C:\\Users\\JToolenDCU\\Documents\\GitHub\\kRAYate\\JavaEditor\\kRAYateEditor\\src\\externalFiles\\gameData.ini"));
+				System.out.println(ini);
+			
+				JButton source = (JButton) e.getSource();
+				if(source.isEnabled()){
+					ini.addValue("[Game]", "playerSpeed", playerSpeed);
+					ini.addValue("[Game]", "screenWidth", scrWidth);
+					ini.addValue("[Game]", "screenHeight", scrHeight);
+					ini.addValue("[Level1]", "playerX", startPosX);
+					ini.addValue("[Level1]", "playerY", startPosY);
+					//ini.save();
+				}
+			}
+		});
+		
+		cancelBut.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e){
+				dispose();
+			}
+		});
+		
+	}
+	
+}

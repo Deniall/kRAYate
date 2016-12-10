@@ -1,0 +1,68 @@
+/**
+ * @author	JToolenDCU date: 19th March'16
+ * @text	A class to listen for mouse motion and change colour of panels
+ */
+package draw;
+
+import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JPanel;
+
+import draw.shapes.Shape;
+import staticThings.StaticVars;
+
+
+public class CellPane extends JPanel {
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	
+    public CellPane() {
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                StaticVars.defaultBackground = getBackground();
+                setBackground(StaticVars.shapeColor);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	if(StaticVars.mouseDrag){
+            		setBackground(StaticVars.shapeColor);
+            	}else{
+            		setBackground(StaticVars.defaultBackground);
+            	}
+            }
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+        		setBackground(StaticVars.shapeColor);
+            	StaticVars.mouseDrag = true;
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){
+            	setBackground(StaticVars.shapeColor);
+            	StaticVars.mouseDrag = false;
+            }
+            
+            @Override
+            public void mouseClicked(MouseEvent e){
+            	setBackground(StaticVars.shapeColor);
+            }
+        });
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(10, 10);
+    }
+ 
+}
